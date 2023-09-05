@@ -1,0 +1,25 @@
+build:
+  # gpu: true
+  python_version: "3.8"
+  system_packages:
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+    - "libsndfile1-dev"
+    - "ffmpeg"
+    - "gcc"
+    - "python3.8-dev"
+    - "ffmpeg"
+  python_packages:
+    - "numpy==1.19.5"
+    - "cython"
+    - "aiohttp"
+    - "torchaudio"
+    - "pytorch_lightning"
+    - "madmom==0.16.1"
+  run:
+    - python setup.py install
+    - cd checkpoints
+    - wget https://zenodo.org/record/5525120/files/wavebeat_epoch%3D98-step%3D24749.ckpt?download=1
+    - mv wavebeat_epoch=98-step=24749.ckpt?download=1 wavebeat_epoch=98-step=24749.ckpt
+
+predict: "scripts/predict.py:Predictor"
